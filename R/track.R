@@ -7,8 +7,11 @@ track_code <- function(expr, env) {
   local_acc()
 
   local_trace(getOption, (!!acc_add)("get", "option", x))
+  # local_trace(Sys.getenv, (!!acc_add)("get", "envvar", x))
+
   dot_names <- expr(names(substitute(alist(...)))[-1])
   local_trace(options, (!!acc_add)("set", "option", !!dot_names))
+  # local_trace(Sys.setenv, (!!acc_add)("set", "envar", !!dot_names))
 
   eval_bare(expr, watch_env(env))
   acc_data()
