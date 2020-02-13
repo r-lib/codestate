@@ -15,6 +15,10 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: 
     rlang,
-    objectable (>= 0.0.0.9000)
+    objectable (>= 0.0.0.9000),
+    R6
 Remotes: 
     r-lib/objectable
+RoxygenNote: 7.0.2
+Suggests: 
+    testthat (>= 2.1.0)
