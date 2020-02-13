@@ -26,9 +26,7 @@ check_active <- function() {
 
 local_acc <- function(env = caller_env()) {
   acc_activate()
-
-  code <- expr(on.exit(acc_deactivate(), add = TRUE))
-  eval_bare(code, env)
+  on_exit(acc_deactivate(), env = env)
 }
 
 acc_activate <- function() {
