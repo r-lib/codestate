@@ -18,20 +18,13 @@ watch_env <- function(env) {
   objectable::object_table(
     parent_env = env,
     get = function(name) {
-      if (!env_has(env, name, inherit = TRUE)) {
-        stop("object '", name, "' not found", call. = FALSE)
-      }
+      binding <- find_binding(name, env)
 
-      # Track symbols above the global environment
-      # This isn't quite right because the symbol might also be found earlier -
-      # probably need to implement inheritance manually so I can do this
-      # correctly
-      pkg_env <- env_parent(global_env())
-      if (!env_has(pkg_env, name, inherit = TRUE)) {
+      if (!binding$in_package) {
         acc_add("get", "binding", name)
       }
 
-      env_get(env, name, inherit = TRUE)
+      binding$val
     },
 
     set = function(name, value) {
@@ -40,3 +33,4 @@ watch_env <- function(env) {
     }
   )
 }
+
