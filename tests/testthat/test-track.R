@@ -11,6 +11,11 @@ test_that("don't track bindings from packages", {
   expect_equal(nrow(td), 0L)
 })
 
+test_that("don't track get if set first", {
+  td <- track({x <- 1; x})
+  expect_equal(td, acc_tibble("set", "binding", "x"))
+})
+
 test_that("track getting and setting options", {
   td <- track(data.frame(x = "a"))
   expect_equal(td, acc_tibble("get", "option", "stringsAsFactors"))

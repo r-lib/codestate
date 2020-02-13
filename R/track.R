@@ -15,12 +15,14 @@ track_code <- function(expr, env) {
 }
 
 watch_env <- function(env) {
+  created <- character()
+
   objectable::object_table(
     parent_env = env,
     get = function(name) {
       binding <- find_binding(name, env)
 
-      if (!binding$in_package) {
+      if (!binding$in_package && !name %in% created) {
         acc_add("get", "binding", name)
       }
 
@@ -28,6 +30,7 @@ watch_env <- function(env) {
     },
 
     set = function(name, value) {
+      created <<- union(created, name)
       acc_add("set", "binding", name)
       env_poke(env, name, value)
     }
