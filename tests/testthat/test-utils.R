@@ -21,12 +21,10 @@ test_that("can temporarily trace a function", {
   expect_condition(mean(1:10), NA)
 })
 
-
 test_that("find_binding() detects if in package", {
   bnd <- find_binding("data.frame", current_env())
   expect_equal(bnd$in_package, TRUE)
   expect_equal(bnd$val, data.frame)
-  expect_equal(bnd$env, baseenv())
 })
 
 test_that("find_binding() errors if not found", {
