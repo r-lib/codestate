@@ -25,3 +25,15 @@ find_binding <- function(name, env, in_package = FALSE) {
     find_binding(name, env_parent(env), in_package)
   }
 }
+
+recycle <- function(x, to, arg = deparse(substitute(x))) {
+  if (length(x) == length(to)) {
+    return(x)
+  }
+
+  if (length(x) != 1) {
+    stop("Can't recycle `", arg, "` to length ", length(to), call. = FALSE)
+  }
+
+  rep(x, length(to))
+}

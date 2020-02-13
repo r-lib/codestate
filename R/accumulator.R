@@ -4,6 +4,9 @@ Accumulator <- R6::R6Class(public = list(
   value = character(),
 
   add = function(action, name, value) {
+    action <- recycle(action, value)
+    name <- recycle(name, value)
+
     self$action <- c(self$action, action)
     self$name <- c(self$name, name)
     self$value <- c(self$value, value)
