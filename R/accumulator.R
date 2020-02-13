@@ -10,9 +10,13 @@ Accumulator <- R6::R6Class(public = list(
   },
 
   data = function() {
-    tibble::tibble(action = self$action, name = self$name, value = self$value)
+    acc_tibble(self$action, self$name, self$value)
   }
 ))
+
+acc_tibble <- function(action, name, value) {
+  tibble::tibble(action = action, name = name, value = value)
+}
 
 env <- env()
 
