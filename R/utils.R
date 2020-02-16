@@ -37,3 +37,18 @@ recycle <- function(x, to, arg = deparse(substitute(x))) {
 
   rep(x, length(to))
 }
+
+random_seed <- function() {
+  env_get(global_env(), ".Random.seed", default = zap())
+}
+
+list_diff <- function(old, new) {
+  changed <- rep(FALSE, length(new))
+
+  for (i in seq_along(new)) {
+    nm <- names(new)[[i]]
+    changed[[i]] <- !identical(old[[nm]], new[[nm]])
+  }
+
+  new[changed]
+}

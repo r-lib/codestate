@@ -3,6 +3,7 @@ track <- function(expr) {
 
   track_code(quo_get_expr(expr), quo_get_env(expr))
 }
+
 track_code <- function(expr, env) {
   local_acc()
 
@@ -13,8 +14,16 @@ track_code <- function(expr, env) {
   local_trace(options, (!!acc_add)("set", "option", !!dot_names))
   # local_trace(Sys.setenv, (!!acc_add)("set", "envar", !!dot_names))
 
+  old <- capture_state()
   eval_bare(expr, watch_env(env))
-  acc_data()
+  new <- capture_state()
+
+  list(
+    expr = expr,
+    env = env,
+    tracking = acc_data(),
+    state = list(old = old, new = new)
+  )
 }
 
 watch_env <- function(env) {
@@ -40,3 +49,11 @@ watch_env <- function(env) {
   )
 }
 
+capture_state <- function() {
+  list(
+    wd = getwd(),
+    search = search(),
+    options = options(),
+    seed = random_seed()
+  )
+}
