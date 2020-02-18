@@ -52,3 +52,14 @@ list_diff <- function(old, new) {
 
   new[changed]
 }
+
+compact <- function(x) {
+  x[!vapply(x, vec_is_empty, logical(1))]
+}
+
+map <- function(.x, .f, ...) {
+  lapply(X = .x, FUN = .f, ...)
+}
+map2 <- function(.x, .y, .f, ...) {
+  mapply(.f, .x, .y, SIMPLIFY = FALSE, MoreArgs = list(...), USE.NAMES = FALSE)
+}

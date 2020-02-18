@@ -16,7 +16,9 @@ Roxygen: list(markdown = TRUE)
 Imports: 
     rlang,
     objectable (>= 0.0.0.9000),
-    R6
+    R6,
+    vctrs,
+    digest
 Remotes: 
     r-lib/objectable
 RoxygenNote: 7.0.2

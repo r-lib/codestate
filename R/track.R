@@ -18,6 +18,11 @@ track_code <- function(expr, env) {
   eval_bare(expr, watch_env(env))
   new <- capture_state()
 
+  if (!identical(old$seed, new$seed)) {
+    acc_add("set", "seed", NA)
+    acc_add("get", "seed", NA)
+  }
+
   list(
     expr = expr,
     env = env,

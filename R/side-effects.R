@@ -25,5 +25,5 @@ side_effects <- function(chunk) {
     out$packages <- new_packages
   }
 
-  out
+  compact(out)
 }
