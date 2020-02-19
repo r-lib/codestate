@@ -63,3 +63,6 @@ map <- function(.x, .f, ...) {
 map2 <- function(.x, .y, .f, ...) {
   mapply(.f, .x, .y, SIMPLIFY = FALSE, MoreArgs = list(...), USE.NAMES = FALSE)
 }
+map_chr <- function(.x, .f, ...) {
+  vapply(.x, .f, FUN.VALUE = character(1), ...)
+}

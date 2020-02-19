@@ -18,7 +18,8 @@ Imports:
     objectable (>= 0.0.0.9000),
     R6,
     vctrs,
-    digest
+    digest,
+    cli
 Remotes: 
     r-lib/objectable
 RoxygenNote: 7.0.2
