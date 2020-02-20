@@ -1,9 +1,71 @@
-process <- function(..., .env = caller_env()) {
+process <- function(..., .env = caller_env(), .cache = list()) {
   dots <- enexprs(...)
-  chunks <- lapply(dots, cache_chunk, env = .env)
-  names(chunks) <- chunk_names(names(dots))
+  names(dots) <- chunk_names(names(dots))
 
-  add_dependencies(chunks)
+  chunks <- rep_named(names(dots), list(NULL))
+  cache <- .cache
+
+  for (nm in names(dots)) {
+    chunks[[nm]] <- chunk_eval(dots[[nm]], env, cache[[nm]], compact(chunks))
+  }
+
+  chunks
+}
+
+chunk_eval <- function(code, env, cached, chunks) {
+  if (chunk_invalid(code, cached, chunks)) {
+    browser()
+    out <- chunk_cache(code, env)
+    out$dependencies <- chunk_dependencies(out, chunks)
+    out
+  } else {
+    chunk_replay(cached, env)
+  }
+}
+
+chunk_replay <- function(chunk, env) {
+  env_bind(env, !!!chunk$bindings)
+
+  if (!is.null(chunk$effects$seed)) {
+    env_bind(globalenv(), .Random.seed = chunk$effects$seed)
+  }
+
+  if (!is.null(chunk$effects$options)) {
+    options(chunk$effects$options)
+  }
+
+  if (!is.null(chunk$effects$wd)) {
+    setwd(chunk$effects$wd)
+  }
+
+  if (!is.null(chunk$effects$packages)) {
+    lapply(chunk$effects$packages, library, character.only = TRUE)
+  }
+
+  chunk
+}
+
+chunk_invalid <- function(code, cached, chunks) {
+  # Chunk isn't cached
+  if (is.null(cached)) {
+    return(TRUE)
+  }
+
+  # Code inside chunk has changed
+  if (!identical(utils:::removeSource(code), utils:::removeSource(cached$code))) {
+    return(TRUE)
+  }
+
+  # Dependencies have changed
+  dependencies <- chunk_dependencies(cached, chunks)
+  if (!setequal(dependencies$chunk, cached$dependencies$chunk)) {
+    return(TRUE)
+  }
+
+  # Side-effects of a dependency have changed
+  old_hash <- cached$dependencies$effects_hash
+  new_hash <- map_chr(cached$dependencies$chunk, function(x) chunks[[x]]$effects_hash %||% "NO CACHE")
+  any(old_hash != new_hash)
 }
 
 chunk_names <- function(x) {

@@ -54,7 +54,7 @@ list_diff <- function(old, new) {
 }
 
 compact <- function(x) {
-  x[!vapply(x, vec_is_empty, logical(1))]
+  x[!vapply(x, is.null, logical(1))]
 }
 
 map <- function(.x, .f, ...) {
@@ -66,3 +66,4 @@ map2 <- function(.x, .y, .f, ...) {
 map_chr <- function(.x, .f, ...) {
   vapply(.x, .f, FUN.VALUE = character(1), ...)
 }
+

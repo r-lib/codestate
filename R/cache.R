@@ -1,9 +1,9 @@
 cache <- function(expr) {
   expr <- enquo(expr)
-  cache_chunk(quo_get_expr(expr), quo_get_env(expr))
+  chunk_cache(quo_get_expr(expr), quo_get_env(expr))
 }
 
-cache_chunk <- function(code, env) {
+chunk_cache <- function(code, env) {
   old <- capture_state()
   tracking <- track_code(code, env)
   new <- capture_state()
@@ -21,6 +21,7 @@ cache_chunk <- function(code, env) {
     dependencies = NULL
   )
 }
+
 
 # tracking ----------------------------------------------------------------
 

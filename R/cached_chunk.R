@@ -42,7 +42,7 @@ print.cached_chunk <- function(x, ...) {
   if (!is.null(x$dependencies) && nrow(x$dependencies) > 0) {
     cli::cli_text("Depends on:")
     cli::cli_ul()
-    cli::cli_li(glue::glue("{x$dependencies$chunk} ({x$dependencies$hash}): {{.val {x$dependencies$reason} }}"))
+    cli::cli_li(glue::glue("{x$dependencies$chunk} ({x$dependencies$effects_hash}): {{.val {x$dependencies$reason} }}"))
     cli::cli_end()
     cli::cli_end()
   }
