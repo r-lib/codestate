@@ -1,6 +1,5 @@
 Package: codestate
-Title: Determine How Code Depends On and Modifies
-    State.
+Title: Determine How Code Depends On and Modifies State.
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Hadley",
@@ -10,7 +9,7 @@ Authors@R:
       person(given = "RStudio",
              role = "cph"))
 Description: Experimental tools to explore how code
-    accesses and modifies state. Includes tools or 
+    accesses and modifies state. 
 License: MIT + file LICENSE
 Imports: 
     cli,
