@@ -1,5 +1,6 @@
 Package: codestate
-Title: Determine How Code Depends On and Modifies State.
+Title: Determine How Code Depends On and Modifies
+    State.
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Hadley",
@@ -8,26 +9,26 @@ Authors@R:
              email = "hadley@rstudio.com"),
       person(given = "RStudio",
              role = "cph"))
-Description: Experimental tools to explore how code accesses and modifies
-    state. Includes tools or 
+Description: Experimental tools to explore how code
+    accesses and modifies state. Includes tools or 
 License: MIT + file LICENSE
+Imports: 
+    cli,
+    digest,
+    fs,
+    glue,
+    objectable (>= 0.0.0.9000),
+    qs,
+    R6,
+    rlang,
+    tibble,
+    vctrs
+Suggests: 
+    covr,
+    testthat (>= 2.1.0)
+Remotes: 
+    r-lib/objectable
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Imports: 
-    rlang,
-    objectable (>= 0.0.0.9000),
-    R6,
-    vctrs,
-    digest,
-    cli,
-    qs,
-    fs,
-    tibble,
-    glue
-Remotes: 
-    r-lib/objectable
 RoxygenNote: 7.1.0
-Suggests: 
-    testthat (>= 2.1.0),
-    covr
