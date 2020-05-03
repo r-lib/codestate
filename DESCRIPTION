@@ -21,9 +21,13 @@ Imports:
     vctrs,
     digest,
     cli,
-    fs
+    qs,
+    fs,
+    tibble,
+    glue
 Remotes: 
     r-lib/objectable
 RoxygenNote: 7.1.0
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    covr
