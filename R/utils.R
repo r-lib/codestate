@@ -19,7 +19,7 @@ find_binding <- function(name, env, in_package = FALSE) {
   } else if (env_has(env, name)) {
     list(env = env, val = env_get(env, name), in_package = in_package)
   } else {
-    if (identical(env, global_env()) || identical(env, asNamespace("chonky"))) {
+    if (identical(env, global_env()) || identical(env, asNamespace("codestate"))) {
       in_package <- TRUE
     }
     find_binding(name, env_parent(env), in_package)

@@ -1,4 +1,4 @@
 library(testthat)
-library(chonky)
+library(codestate)
 
-test_check("chonky")
+test_check("codestate")

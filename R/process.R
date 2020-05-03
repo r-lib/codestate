@@ -14,7 +14,6 @@ process <- function(..., .env = caller_env(), .cache = list()) {
 
 chunk_eval <- function(code, env, cached, chunks) {
   if (chunk_invalid(code, cached, chunks)) {
-    browser()
     out <- chunk_cache(code, env)
     out$dependencies <- chunk_dependencies(out, chunks)
     out

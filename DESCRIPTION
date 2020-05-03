@@ -1,5 +1,5 @@
-Package: chonky
-Title: Explore Chunk Inputs and Outputs
+Package: codestate
+Title: Determine How Code Depends On and Modifies State.
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Hadley",
@@ -8,7 +8,8 @@ Authors@R:
              email = "hadley@rstudio.com"),
       person(given = "RStudio",
              role = "cph"))
-Description: Experimental tools to explore implicit chunk inputs and outputs
+Description: Experimental tools to explore how code accesses and modifies
+    state. Includes tools or 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -23,6 +24,6 @@ Imports:
     fs
 Remotes: 
     r-lib/objectable
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Suggests: 
     testthat (>= 2.1.0)
