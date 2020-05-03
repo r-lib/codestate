@@ -51,7 +51,7 @@ chunk_invalid <- function(code, cached, chunks) {
   }
 
   # Code inside chunk has changed
-  if (!identical(utils:::removeSource(code), utils:::removeSource(cached$code))) {
+  if (!identical(remove_source(code), remove_source(cached$code))) {
     return(TRUE)
   }
 
